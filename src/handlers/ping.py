@@ -31,7 +31,8 @@ class PingHandler:
         for name, url in services.items():
             online = await self.http.pong(url)
             statuses.append(f"{name}:".ljust(16) + f"  {YES if online else NO}")
+        statuses = '\n'.join(statuses)
 
-        content = f"**__Lester Interactions Ping__**\n\nBot is online.\n\nService Statuses:{'\n'.join(statuses)}"
+        content = f"**__Lester Interactions Ping__**\n\nBot is online.\n\nService Statuses:\n{statuses}"
 
         return func(content)
