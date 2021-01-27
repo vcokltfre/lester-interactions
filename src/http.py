@@ -13,6 +13,10 @@ class HTTP:
         if self.sess.closed:
             self.sess = ClientSession(headers={'Authorization': f'Bot {TOKEN}'})
 
+    async def pong(self, url: str):
+        async with self.sess.get(url) as resp:
+            return str(resp.status).startswith('2')
+
     async def send_message(self, channel: str, message: str, allowed_mentions: dict = {}):
         async with self.sess.post(BASE + f"/channels/{channel}/messages", json={"content":message, **allowed_mentions}) as resp:
             return await resp.json()

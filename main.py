@@ -8,6 +8,7 @@ from src.http import HTTP
 from src.responses import respond_ephemeral
 
 from src.handlers.roles import RoleHandler
+from src.handlers.ping import PingHandler
 
 app = FastAPI(docs_url=None)
 
@@ -15,7 +16,8 @@ http = HTTP()
 
 handlers = {
     "join": RoleHandler(http),
-    "leave": RoleHandler(http)
+    "leave": RoleHandler(http),
+    "ping": PingHandler(http)
 }
 
 @app.post("/interactions")
