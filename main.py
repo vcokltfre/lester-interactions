@@ -7,11 +7,16 @@ from config.config import PUBKEY
 from src.http import HTTP
 from src.responses import respond_ephemeral
 
+from src.handlers.roles import RoleHandler
+
 app = FastAPI(docs_url=None)
 
 http = HTTP()
 
-handlers = {}
+handlers = {
+    "join": RoleHandler(http),
+    "leave": RoleHandler(http)
+}
 
 @app.post("/interactions")
 async def interactions(req: Request):
