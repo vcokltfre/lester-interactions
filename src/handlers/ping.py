@@ -8,7 +8,8 @@ CHANNELS = [
 ]
 
 services = {
-    "GTAO-Website": "http://gtaodiscord.com",
+    "GTAO-Website": "https://gtaodiscord.com",
+    "Discord": "https://discord.com",
 }
 
 YES = "✅ --> Online!"
@@ -20,6 +21,7 @@ class PingHandler:
         self.http = http
 
     async def call(self, data: dict) -> dict:
+        print(f">> Starting ping request with ID: {data['data']['id']}")
         channel = data["channel_id"]
 
         if channel in CHANNELS:
@@ -35,4 +37,5 @@ class PingHandler:
 
         content = f"**__Lester Interactions Ping__**\n\nBot is online.\n>>> ```\nService:{' '*11} Status:\n{statuses}```"
 
+        print(f">> Completing ping request with ID: {data['data']['id']}")
         return func(content)
