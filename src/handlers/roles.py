@@ -1,5 +1,5 @@
 from config import mcperms_roles
-from src.responses import respond_default, respond_ephemeral
+from src.responses import respond_ephemeral
 from src.utils import getop
 
 rolemap = {
@@ -17,11 +17,6 @@ class RoleHandler:
         self.http = http
 
     async def call(self, data: dict) -> dict:
-        rls = set(data["member"]["roles"]) & set(mcperms_roles)
-
-        if not rls:
-            return respond_ephemeral("You do not have permission to use this command!")
-
         name = data["data"]["name"]
         ops = data["data"]["options"]
         roleid = getop("role", ops)
