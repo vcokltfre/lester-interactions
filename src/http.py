@@ -19,8 +19,8 @@ class HTTP:
 
     async def add_role(self, guild, user, role):
         async with self.sess.put(BASE + f"/guilds/{guild}/members/{user}/roles/{role}") as resp:
-            return await resp.status == 204
+            return resp.status == 204
 
     async def del_role(self, guild, user, role):
         async with self.sess.delete(BASE + f"/guilds/{guild}/members/{user}/roles/{role}") as resp:
-            return await resp.status == 204
+            return resp.status == 204
