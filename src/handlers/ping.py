@@ -11,8 +11,8 @@ services = {
     "GTAO-Website": "http://gtaodiscord.com",
 }
 
-YES = "<:Yes:744714896666787900> Online!"
-NO = "<:No:744714930946572371> Offline!"
+YES = "✅ --> Online!"
+NO =  "❌ --> Offline!"
 
 
 class PingHandler:
@@ -27,12 +27,12 @@ class PingHandler:
         else:
             func = respond_ephemeral
 
-        statuses = [f"`LISC-Webserver".ljust(18, ".") + f":`  {YES}"]
+        statuses = [f"LISC-Webserver".ljust(18, ".") + f": {YES}"]
         for name, url in services.items():
             online = await self.http.pong(url)
-            statuses.append(f"`{name}".ljust(18, ".") + f":`  {YES if online else NO}")
+            statuses.append(f"{name}".ljust(18, ".") + f": {YES if online else NO}")
         statuses = '\n'.join(statuses)
 
-        content = f"**__Lester Interactions Ping__**\n\nBot is online.\n\n`Service:{' '*10} Status:`\n{statuses}"
+        content = f"**__Lester Interactions Ping__**\n\nBot is online.\n\n>>> ```\nService:{' '*10} Status:\n{statuses}```"
 
         return func(content)
