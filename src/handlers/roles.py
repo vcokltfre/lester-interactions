@@ -1,4 +1,3 @@
-from config import mcperms_roles
 from src.responses import respond_ephemeral
 from src.utils import getop
 
