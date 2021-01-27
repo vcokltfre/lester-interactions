@@ -1,4 +1,4 @@
-from src.responses import respond_ephemeral_embed, respond_default_embed
+from src.responses import respond_ephemeral, respond_default
 
 CHANNELS = [
     "802591454953865236",
@@ -23,27 +23,15 @@ class PingHandler:
         channel = data["channel_id"]
 
         if channel in CHANNELS:
-            func = respond_default_embed
+            func = respond_default
         else:
-            func = respond_ephemeral_embed
+            func = respond_ephemeral
 
-        fields = []
+        statuses = [f"LISC-Webserver:".ljust(16) + f"  {YES}"]
         for name, url in services.items():
             online = await self.http.pong(url)
-            fields.append({
-                "name": name,
-                "value": YES if online else NO
-            })
+            statuses.append(f"{name}:".ljust(16) + f"  {YES if online else NO}")
 
-        e = {
-            "title": "Lester Interactions",
-            "description": f"Bot is online!\n\n[Source](https://github.com/vcokltfre/lester-interactions)\n\nComponent Statuses:",
-            "fields": [
-                {
-                    "name": "LISC-Webserver",
-                    "value": YES
-                }
-            ]
-        }
+        content = f"**__Lester Interactions Ping__**\n\nBot is online.\n\nService Statuses:{'\n'.join(statuses)}"
 
-        return func(e)
+        return func(content)
