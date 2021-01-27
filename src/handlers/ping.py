@@ -33,6 +33,6 @@ class PingHandler:
             statuses.append(f"{name}".ljust(18, ".") + f": {YES if online else NO}")
         statuses = '\n'.join(statuses)
 
-        content = f"**__Lester Interactions Ping__**\n\nBot is online.\n\n>>> ```\nService:{' '*10} Status:\n{statuses}```"
+        content = f"**__Lester Interactions Ping__**\n\nBot is online.\n>>> ```\nService:{' '*11} Status:\n{statuses}```"
 
         return func(content)
