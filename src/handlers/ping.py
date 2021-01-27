@@ -27,12 +27,12 @@ class PingHandler:
         else:
             func = respond_ephemeral
 
-        statuses = [f"LISC-Webserver:".ljust(16) + f"  {YES}"]
+        statuses = [f"`LISC-Webserver:".ljust(16) + f"`  {YES}"]
         for name, url in services.items():
             online = await self.http.pong(url)
-            statuses.append(f"{name}:".ljust(16) + f"  {YES if online else NO}")
+            statuses.append(f"`{name}:".ljust(16) + f"`  {YES if online else NO}")
         statuses = '\n'.join(statuses)
 
-        content = f"**__Lester Interactions Ping__**\n\nBot is online.\n\nService Statuses:\n{statuses}"
+        content = f"**__Lester Interactions Ping__**\n\nBot is online.\n\nService:{' '*8} Status:\n{statuses}"
 
         return func(content)
